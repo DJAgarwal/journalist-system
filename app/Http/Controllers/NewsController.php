@@ -25,6 +25,14 @@ class NewsController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->all();
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('news/images', 'public');
+            $data['image'] = $imagePath;
+        }
+        if ($request->hasFile('audio')) {
+            $audioPath = $request->file('audio')->store('news/audio', 'public');
+            $data['audio'] = $audioPath;
+        }
         $data['author_id'] = Auth::user()->id;
         News::create($data);
         return redirect()->route('news.index')->with('success', 'News article created successfully');

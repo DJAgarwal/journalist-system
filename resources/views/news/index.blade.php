@@ -31,7 +31,7 @@
                                 <div class="form-group col-md-4">
                                     <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Search</button>
                                 </div> 
-</div> 
+                            </div> 
                             </form>
                         </div>
                     </div>
@@ -46,7 +46,9 @@
                                     <p>Date: {{$dt->published_at->format('d/m/Y')}}</p>
                                     <p>Location: {{$dt->location}}</p>
                                     <p>Author: {{$dt->author->name}}</p>
-                                    <a href="#" class="btn btn-primary">View Details</a>
+                                    <a href="#" class="btn btn-primary">Edit</a>
+                                    <a href="#" class="btn btn-primary">View</a>
+                                    <a href="#" class="btn btn-primary">Delete</a>
                                 </div>
                             </div>
                         </div>

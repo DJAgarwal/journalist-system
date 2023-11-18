@@ -16,32 +16,41 @@
                         {{ session('success') }}
                     </div>
                     @endif
-                    <div class="row">
+                    <div class="row" style="margin-bottom:20px;">
                         <div class="col-md-12">
                             <form method="GET" action="{{ route('news.index') }}" class="form-inline">
-                                <div class="form-group col-md-6" style="float:left">
+                            <div class="row">
+                                <div class="form-group col-md-4">
                                     <label for="headline">Headline:</label>
+                                    <input type="text" class="form-control" id="headline" name="headline" placeholder="Search by Headline">
                                 </div>
-                                <div class="form-group col-md-6" style="float:right">
-                                    <button type="submit" class="btn btn-primary" style="margin-top: 20px;margin-left: 10px;">Search</button>
-                                </div>  
+                                <div class="form-group col-md-4">
+                                    <label for="author">Author:</label>
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="Search by Author">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Search</button>
+                                </div> 
+</div> 
                             </form>
                         </div>
                     </div>
                     <div class="row">
+                        @foreach($data as $dt)
                         <div class="col-md-6">
                             <div class="news-card">
                                 <img src="https://via.placeholder.com/150" alt="News Image">
                                 <div class="news-card-body">
-                                    <h5>News Headline</h5>
-                                    <p>Description of the news. It can be a brief summary.</p>
-                                    <p>Date: November 18, 2023</p>
-                                    <p>Place: Ajmer</p>
-                                    <p>Author: Ajmer</p>
+                                    <h5>{{$dt->headline}}</h5>
+                                    <p>{{$dt->description}}</p>
+                                    <p>Date: {{$dt->published_at->format('d/m/Y')}}</p>
+                                    <p>Location: {{$dt->location}}</p>
+                                    <p>Author: {{$dt->author->name}}</p>
                                     <a href="#" class="btn btn-primary">View Details</a>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

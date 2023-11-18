@@ -1,0 +1,21 @@
+.news-card {
+    display: flex;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.news-card img {
+    max-width: 150px;
+    object-fit: cover;
+    border-radius: 8px 0 0 8px;
+}
+
+.news-card-body {
+    padding: 10px;
+}
+
+.news-card-body p {
+    margin-bottom: 5px;
+}

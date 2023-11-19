@@ -29,7 +29,20 @@
                                     <input type="text" class="form-control" id="author" name="author" placeholder="Search by Author">
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <label for="location">Location:</label>
+                                    <input type="text" class="form-control" id="location" name="location" placeholder="Search by Location">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="from">From:</label>
+                                    <input type="date" class="form-control" id="from" name="from" placeholder="Search by From Date">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="to">To:</label>
+                                    <input type="date" class="form-control" id="to" name="to" placeholder="Search by To Date">
+                                </div>
+                                <div class="form-group col-md-4">
                                     <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Search</button>
+                                    <a href="{{ route('news.index') }}" class="btn btn-secondary" style="margin-top: 20px; margin-left: 5px;">Reset</a>
                                 </div> 
                             </div> 
                             </form>
@@ -39,7 +52,7 @@
                         @foreach($data as $dt)
                         <div class="col-md-6">
                             <div class="news-card">
-                                <img src="https://via.placeholder.com/150" alt="News Image">
+                                <img src="{{ asset('news'.$dt->image) }}" alt="News Image">
                                 <div class="news-card-body">
                                     <h5>{{$dt->headline}}</h5>
                                     <p>{{$dt->description}}</p>
@@ -48,7 +61,11 @@
                                     <p>Author: {{$dt->author->name}}</p>
                                     <a href="#" class="btn btn-primary">Edit</a>
                                     <a href="#" class="btn btn-primary">View</a>
-                                    <a href="#" class="btn btn-primary">Delete</a>
+                                    <form action="{{ route('news.destroy', $dt->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this news?')">Delete</button>
+                                        </form>
                                 </div>
                             </div>
                         </div>

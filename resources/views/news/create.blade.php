@@ -68,8 +68,9 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Create</button>
                         </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Create</button>
+
                     </form>
                 </div>
             </div>

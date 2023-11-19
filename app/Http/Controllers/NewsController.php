@@ -13,9 +13,26 @@ class NewsController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
-        $data = News::with('author')->get();
+        $query = News::with('author');
+        if ($request->has('headline')) {
+            $query->where('headline', 'like', '%' . $request->input('headline') . '%');
+        }
+        if ($request->has('location')) {
+            $query->where('location', 'like', '%' . $request->input('location') . '%');
+        }
+        if ($request->has('author')) {
+            $query->whereHas('author', function ($subquery) use ($request) {
+                $subquery->where('name', 'like', '%' . $request->input('author') . '%');
+            });
+        }
+        if ($request->filled('from') && $request->filled('to')) {
+            $fromDate = $request->input('from');
+            $toDate = $request->input('to');
+            $query->whereBetween('published_at', [$fromDate, $toDate]);
+        }
+        $data = $query->get();
         return view('news.index',compact('data'));
     }
     public function create()
@@ -26,15 +43,23 @@ class NewsController extends Controller
     {
         $data = $request->all();
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('news/images', 'public');
-            $data['image'] = $imagePath;
+            $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('news/images'), $imageName);
+            $data['image'] = '/images/' . $imageName;
         }
         if ($request->hasFile('audio')) {
-            $audioPath = $request->file('audio')->store('news/audio', 'public');
-            $data['audio'] = $audioPath;
+            $audioName = time() . '_' . $request->file('audio')->getClientOriginalName();
+            $request->file('audio')->move(public_path('news/audio'), $audioName);
+            $data['audio'] = '/audio/' . $audioName;
         }
         $data['author_id'] = Auth::user()->id;
         News::create($data);
         return redirect()->route('news.index')->with('success', 'News article created successfully');
+    }
+    public function destroy($id)
+    {
+        $news = News::findOrFail($id);
+        $news->delete();
+        return redirect()->route('news.index')->with('success', 'News article deleted successfully');
     }
 }

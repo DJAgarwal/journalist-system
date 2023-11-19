@@ -7,7 +7,8 @@ Steps to setup project:
 6. Run the project: 127.0.0.1:8000
 7. PHP version: 8.2.4
 8. Laravel version: 10.10
-9. Mailtrap credentials(Email will be sent there for forget password):
+9. Register the new user to post news.
+10. Mailtrap credentials(Email will be sent there for forget password):
 email:dheerajagarwal1995@gmail.com
 password:good best 
-10. Let me know if you face any difficulties. dheerajagarwal1995@gmail.com
+11. Let me know if you face any difficulties. dheerajagarwal1995@gmail.com

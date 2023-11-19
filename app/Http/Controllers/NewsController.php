@@ -61,6 +61,38 @@ class NewsController extends Controller
         News::create($data);
         return redirect()->route('news.index')->with('success', 'News article created successfully');
     }
+    public function edit($id)
+    {
+        $news = News::findOrFail($id);
+        return view('news.edit',compact('news'));
+    }
+    public function update(StoreRequest $request, $id)
+    {
+        $news = News::find($id);
+        $data = $request->all(); 
+        if ($request->hasFile('image')) {
+            $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('news/images'), $imageName);
+            $data['image'] = '/images/' . $imageName;
+        }
+        if ($request->hasFile('audio')) {
+            $audioName = time() . '_' . $request->file('audio')->getClientOriginalName();
+            $request->file('audio')->move(public_path('news/audio'), $audioName);
+            $data['audio'] = '/audio/' . $audioName;
+        }
+        if ($request->hasFile('video')) {
+            $videoName = time() . '_' . $request->file('video')->getClientOriginalName();
+            $request->file('video')->move(public_path('news/video'), $videoName);
+            $data['video'] = '/video/' . $videoName;
+        }
+        $news->update($data);
+        return redirect()->route('news.index')->with('success', 'News updated successfully.');
+    }
+    public function view($id)
+    {
+        $news = News::findOrFail($id);
+        return view('news.view',compact('news'));
+    }
     public function destroy($id)
     {
         $news = News::findOrFail($id);

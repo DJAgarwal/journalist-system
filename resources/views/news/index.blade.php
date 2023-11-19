@@ -59,8 +59,8 @@
                                     <p>Category: {{$dt->category}}</p>
                                     <p>Date: {{$dt->published_at->format('d/m/Y')}} | Location: {{$dt->location}}</p>
                                     <p>Author: {{$dt->author->name}}</p>
-                                    <a href="#" class="btn btn-primary">Edit</a>
-                                    <a href="#" class="btn btn-primary">View</a>
+                                    <a href="{{ route('news.edit', $dt->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('news.view', $dt->id) }}" class="btn btn-primary">View</a>
                                     <form action="{{ route('news.destroy', $dt->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')

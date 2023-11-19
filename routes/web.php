@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\{UserController, NewsController};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +28,5 @@ Route::prefix('news')->group(function () {
 });
 Route::prefix('user')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
 });

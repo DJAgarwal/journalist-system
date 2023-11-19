@@ -26,3 +26,6 @@ Route::prefix('news')->group(function () {
     Route::get('/view/{id}', [NewsController::class, 'view'])->name('news.view');
     Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
 });
+Route::prefix('user')->group(function () {
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+});

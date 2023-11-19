@@ -20,6 +20,7 @@ class StoreRequest extends FormRequest
             'published_at'  => 'required|date',
             'image'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'audio'         => 'nullable|file|mimes:mp3|max:2048',
+            'video'         => 'nullable|file|mimes:mp4,mov,avi,wmv|max:20480',
         ];
     }
 }

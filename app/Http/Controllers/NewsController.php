@@ -52,6 +52,11 @@ class NewsController extends Controller
             $request->file('audio')->move(public_path('news/audio'), $audioName);
             $data['audio'] = '/audio/' . $audioName;
         }
+        if ($request->hasFile('video')) {
+            $videoName = time() . '_' . $request->file('video')->getClientOriginalName();
+            $request->file('video')->move(public_path('news/video'), $videoName);
+            $data['video'] = '/video/' . $videoName;
+        }
         $data['author_id'] = Auth::user()->id;
         News::create($data);
         return redirect()->route('news.index')->with('success', 'News article created successfully');

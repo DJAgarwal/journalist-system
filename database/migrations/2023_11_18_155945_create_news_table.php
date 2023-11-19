@@ -15,16 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('headline');
             $table->string('location');
+            $table->string('category');
             $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
             $table->text('description');
             $table->timestamp('published_at');
             $table->string('image')->nullable();
             $table->string('audio')->nullable();
+            $table->string('video')->nullable();
             $table->timestamps();
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

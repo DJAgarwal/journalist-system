@@ -56,8 +56,8 @@
                                 <div class="news-card-body">
                                     <h5>{{$dt->headline}}</h5>
                                     <p>{{$dt->description}}</p>
-                                    <p>Date: {{$dt->published_at->format('d/m/Y')}}</p>
-                                    <p>Location: {{$dt->location}}</p>
+                                    <p>Category: {{$dt->category}}</p>
+                                    <p>Date: {{$dt->published_at->format('d/m/Y')}} | Location: {{$dt->location}}</p>
                                     <p>Author: {{$dt->author->name}}</p>
                                     <a href="#" class="btn btn-primary">Edit</a>
                                     <a href="#" class="btn btn-primary">View</a>
